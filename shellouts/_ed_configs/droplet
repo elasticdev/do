@@ -37,7 +37,7 @@ class Main(DoCli):
         self.product = "droplet"
         self.provider = "do"
         self.resource_type = "server"
-        self.shelloutconfig = "elasticdev:::aws::droplet"
+        self.shelloutconfig = "elasticdev:::do::droplet"
 
     def exists(self,**kwargs):
 
