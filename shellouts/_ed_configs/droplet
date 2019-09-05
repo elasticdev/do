@@ -24,6 +24,7 @@ from time import sleep
 from ed_helper_publisher.loggerly import ElasticDevLogger
 from ed_helper_publisher.cloud.docli import DoCli
 from ed_helper_publisher.utilities import convert_str2json
+from ed_helper_publisher.utilities import import convert_str2list
 
 class Main(DoCli):
 
@@ -147,7 +148,11 @@ class Main(DoCli):
         tags.extend( [ resource["id"], resource["name"], resource["region"] ] )
 
         if add_tags:
-            add_tags = convert_str2json(add_tags)
+            try:
+                add_tags = convert_str2json(add_tags)
+            except:
+                add_tags = convert_str2list(add_tags)
+
             tags.append(add_tags)
 
         # Make sure tags are distinct
