@@ -193,7 +193,7 @@ class Main(DoCli):
 
             self.successful_output(output=results["output"])
 
-        sleep(1)
+        sleep(2)
 
         failed_message = "could not destroyed {} in {}".format(self.product,
                                                                ref_hostname,
