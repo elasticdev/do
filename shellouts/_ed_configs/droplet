@@ -55,24 +55,7 @@ class Main(DoCli):
         results = self.execute(cmd,convert_to_json=convert_to_json,exit_error=False)["output"]
         if not results: return {"status":False}
 
-        print ''
-        print ''
-        print ''
-        print results
-        print ''
-        print type(results)
-        print ''
-        print ''
-
         for result in results:
-
-            print 'a'*32
-            print 'a'*32
-            print 'a'*32
-            print 'a'*32
-            print type(result)
-            print type(result)
-            print type(result)
 
             if instance_id and int(instance_id) == int(result["id"]): 
                 results["status"] = True
@@ -112,7 +95,7 @@ class Main(DoCli):
             self.cmd_failed(failed_message=failed_message)
 
         add_cmd = "create"
-        _cmd = "{} {} {} --image {} --size {} --ssh_keys {}".format(self.base_cmd,
+        _cmd = "{} {} {} --image {} --size {} --ssh-keys {}".format(self.base_cmd,
                                                                     add_cmd,
                                                                     name, 
                                                                     image,
