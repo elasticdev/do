@@ -133,7 +133,7 @@ class Main(DoCli):
         resource["active"] = True
 
         tags = self.get_tags()
-        tags.extend( resource["id"], resource["name"], resource["region"] )
+        tags.extend( [ resource["id"], resource["name"], resource["region"] ] )
 
         if add_tags:
             add_tags = convert_str2json(add_tags)
