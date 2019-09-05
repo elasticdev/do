@@ -41,6 +41,7 @@ class Main(DoCli):
 
     def exists(self,**kwargs):
 
+        self.get_region()
         #doctl compute droplet list --region nyc3 --output json -t $DO_TOKEN
 
         add_cmd = "list"
@@ -69,6 +70,8 @@ class Main(DoCli):
 
     def get(self):
 
+        self.get_region()
+
         results = self.exists(**self.inputargs)
 
         if results.get("status") is None: exit(0)
@@ -82,6 +85,7 @@ class Main(DoCli):
 
         #doctl compute droplet create webserver01 --region nyc1 --image debian-8-x64 --size 4gb --ssh-keys 1234 --wait
 
+        self.get_region()
         name = self.inputargs["name"]
         image = self.inputargs.get("image","s-1vcpu-1gb")
         droplet_size = self.inputargs.get("DROPLET_SIZE","s-1vcpu-1gb")
@@ -159,6 +163,7 @@ class Main(DoCli):
 
         #doctl compute droplet delete <droplet-id|droplet-name>... [flags]
 
+        self.get_region()
         name = self.inputargs.get("name")
         instance_id = self.inputargs.get("instance_id")
 
