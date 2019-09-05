@@ -62,7 +62,7 @@ class Main(DoCli):
                 return results
 
             if name and str(name) == str(result["name"]):
-                results["status"] = True
+                result["status"] = True
                 return results
 
         return {"status":False}
