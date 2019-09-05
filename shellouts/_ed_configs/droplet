@@ -58,12 +58,12 @@ class Main(DoCli):
         for result in results:
 
             if instance_id and int(instance_id) == int(result["id"]): 
-                results["status"] = True
-                return results
+                result["status"] = True
+                return result
 
             if name and str(name) == str(result["name"]):
                 result["status"] = True
-                return results
+                return result
 
         return {"status":False}
 
