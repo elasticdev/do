@@ -55,6 +55,14 @@ class Main(DoCli):
         results = self.execute(cmd,convert_to_json=convert_to_json,exit_error=False)
         if not results: return {"status":False}
 
+        print ''
+        print ''
+        print ''
+        print results
+        print ''
+        print ''
+        print ''
+
         for result in results:
 
             if instance_id and int(instance_id) == int(result["id"]): 
@@ -83,7 +91,7 @@ class Main(DoCli):
         #doctl compute droplet create webserver01 --region nyc1 --image debian-8-x64 --size 4gb --ssh-keys 1234 --wait
 
         name = self.inputargs["name"]
-        image = self.inputargs["image"]
+        image = self.inputargs.get("image","s-1vcpu-1gb")
         droplet_size = self.inputargs.get("DROPLET_SIZE","s-1vcpu-1gb")
         key = self.inputargs.get("key","first_ssh_key")
         add_tags = self.inputargs.get("tags")
