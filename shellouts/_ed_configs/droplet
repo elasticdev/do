@@ -52,7 +52,7 @@ class Main(DoCli):
         _cmd = "{} {}".format(self.base_cmd,add_cmd)
         cmd = self.get_final_cmd(_cmd)
 
-        results = self.execute(cmd,convert_to_json=convert_to_json,exit_error=False)
+        results = self.execute(cmd,convert_to_json=convert_to_json,exit_error=False)["output"]
         if not results: return {"status":False}
 
         print ''
