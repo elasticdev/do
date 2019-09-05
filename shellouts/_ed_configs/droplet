@@ -147,7 +147,8 @@ class Main(DoCli):
 
         resource["destroy"]["env_vars"] = json.dumps({"NAME":name,
                                                       "CONFIRM":confirm,
-                                                      "INSTANCE_ID":Instance['InstanceId'],
+                                                      "INSTANCE_ID":resource["id"],
+                                                      "NAME":resource["name"],
                                                       "METHOD":"destroy",
                                                       "DO_DEFAULT_REGION":self.do_default_region,
                                                       "DO_TOKEN":self.do_token})
