@@ -92,6 +92,9 @@ class Main(DoCli):
         key_id = self.inputargs.get("key_id")
         add_tags = self.inputargs.get("tags")
         confirm = self.inputargs.get("confirm",True)
+        monitoring = self.inputargs.get("monitoring",True)
+        backup = self.inputargs.get("backup")
+        private_networking = self.inputargs.get("private_networking",True)
 
         # Needs False if it finds the server
         if self.exists(convert_to_json=False,**self.inputargs).get("status") is not False:
@@ -99,13 +102,17 @@ class Main(DoCli):
             self.cmd_failed(failed_message=failed_message)
 
         add_cmd = "create"
-        _cmd = "{} {} {} --image {} --size {}".format(self.base_cmd,
-                                                      add_cmd,
-                                                      name, 
-                                                      image,
-                                                      droplet_size)
+        _cmd = "{} {} {} --tag-name {} --image {} --size {}".format(self.base_cmd,
+                                                                    add_cmd,
+                                                                    name, 
+                                                                    name, 
+                                                                    image,
+                                                                    droplet_size)
 
         if key_id: _cmd = "{} --ssh-keys {}".format(_cmd,key_id)
+        if monitoring: _cmd = "{} --enable-monitoring".format(_cmd)
+        if private_networking: _cmd = "{} --enable-private-networking".format(_cmd)
+        if backup: _cmd = "{} --enable-backups".format(_cmd)
 
         if confirm: _cmd = "{} --wait".format(_cmd)
         cmd = self.get_final_cmd(_cmd,output_json=True)
@@ -227,7 +234,10 @@ environmental variables:
         DROPLET_SIZE (default - s-1vcpu-1gb)
         IMAGE 
         NAME
-        KEY 
+        KEY_ID
+        MONITORING
+        PRIVATE_NETWORKING
+        BACKUP
         JOB_INSTANCE_ID (optional)
         SCHEDULE_ID (optional)
         CONFIRM (optional)
@@ -262,6 +272,9 @@ if __name__ == '__main__':
                          "job_instance_id",
                          "schedule_id",
                          "instance_id",
+                         "monitoring",
+                         "private_networking",
+                         "backup",
                          "key_id",
                          "confirm",
                          "tags",
