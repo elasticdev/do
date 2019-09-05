@@ -185,11 +185,12 @@ class Main(DoCli):
             self.successful_output(output=output)
 
         add_cmd = "delete"
-        _cmd = "{} {} {}".format(self.base_cmd,
-                                 add_cmd,
-                                 ref_hostname)
+        _cmd = "{} {} {} --force".format(self.base_cmd,
+                                         add_cmd,
+                                         ref_hostname)
 
-        cmd = self.get_final_cmd(_cmd,output_json=True)
+        # You don't include region when deleting on digital ocean
+        cmd = self.get_final_cmd(_cmd,add_region=False,output_json=True)
         results = self.execute(cmd,convert_to_json=None)
 
         if results.get("status") is True: 
