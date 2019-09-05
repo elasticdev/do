@@ -102,6 +102,7 @@ class Main(DoCli):
             self.cmd_failed(failed_message=failed_message)
 
         add_cmd = "create"
+
         _cmd = "{} {} {} --image {} --size {}".format(self.base_cmd,
                                                       add_cmd,
                                                       name, 
