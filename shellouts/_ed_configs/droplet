@@ -21,10 +21,10 @@ import json
 import sys
 from time import sleep
 
-from ed_helper_publisher.loggerly import ElasticDevLogger
-from ed_helper_publisher.cloud.docli import DoCli
 from ed_helper_publisher.utilities import convert_str2json
 from ed_helper_publisher.utilities import convert_str2list
+from ed_helper_publisher.loggerly import ElasticDevLogger
+from ed_helper_publisher.cloud.docli import DoCli
 
 class Main(DoCli):
 
