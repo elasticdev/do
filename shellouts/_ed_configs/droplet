@@ -85,7 +85,7 @@ class Main(DoCli):
         name = self.inputargs["name"]
         image = self.inputargs.get("image","s-1vcpu-1gb")
         droplet_size = self.inputargs.get("DROPLET_SIZE","s-1vcpu-1gb")
-        key = self.inputargs.get("key","first_ssh_key")
+        key_id = self.inputargs.get("key_id")
         add_tags = self.inputargs.get("tags")
         confirm = self.inputargs.get("confirm",True)
 
@@ -95,12 +95,13 @@ class Main(DoCli):
             self.cmd_failed(failed_message=failed_message)
 
         add_cmd = "create"
-        _cmd = "{} {} {} --image {} --size {} --ssh-keys {}".format(self.base_cmd,
-                                                                    add_cmd,
-                                                                    name, 
-                                                                    image,
-                                                                    droplet_size,
-                                                                    key)
+        _cmd = "{} {} {} --image {} --size {}".format(self.base_cmd,
+                                                      add_cmd,
+                                                      name, 
+                                                      image,
+                                                      droplet_size)
+
+        if key_id: _cmd = "{} --ssh-keys {}".format(_cmd,key_id)
 
         if confirm: _cmd = "{} --wait".format(_cmd)
         cmd = self.get_final_cmd(_cmd,output_json=True)
@@ -254,7 +255,7 @@ if __name__ == '__main__':
                          "job_instance_id",
                          "schedule_id",
                          "instance_id",
-                         "key",
+                         "key_id",
                          "confirm",
                          "tags",
                          "do_default_region" ]
@@ -274,7 +275,7 @@ if __name__ == '__main__':
 
         req_keys = [ "name",
                      "image",
-                     "key" ]
+                     "key_id" ]
 
         main.check_required_inputargs(keys=req_keys)
         main.create()
