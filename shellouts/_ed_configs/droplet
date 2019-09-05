@@ -102,12 +102,12 @@ class Main(DoCli):
             self.cmd_failed(failed_message=failed_message)
 
         add_cmd = "create"
-        _cmd = "{} {} {} --tag-name {} --image {} --size {}".format(self.base_cmd,
-                                                                    add_cmd,
-                                                                    name, 
-                                                                    name, 
-                                                                    image,
-                                                                    droplet_size)
+        _cmd = "{} {} {} {} --image {} --size {}".format(self.base_cmd,
+                                                         add_cmd,
+                                                         name, 
+                                                         name, 
+                                                         image,
+                                                         droplet_size)
 
         if key_id: _cmd = "{} --ssh-keys {}".format(_cmd,key_id)
         if monitoring: _cmd = "{} --enable-monitoring".format(_cmd)
