@@ -106,7 +106,7 @@ class Main(DoCli):
         if confirm: _cmd = "{} --wait".format(_cmd)
         cmd = self.get_final_cmd(_cmd,output_json=True)
 
-        Instance = self.execute(cmd,convert_to_json=True,exit_error=True)[0]
+        Instance = self.execute(cmd,convert_to_json=True,exit_error=True)["output"][0]
 
         resource = {"raw":{}}
         resource["raw"][self.product] = Instance
