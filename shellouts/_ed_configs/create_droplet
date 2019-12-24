@@ -29,11 +29,33 @@ if backup: inputargs["backups"] = True
 if monitoring: inputargs["monitoring"] = True
 if key_id: inputargs["ssh_keys"] = key_id
 
+#'destroy',
+#'id',
+#'image',
+#'ip_address',
+#'name',
+#'networks',
+#'private_ip_address',
+#'region',
+#'size',
+#'size_slug',
+#'snapshot_ids',
+
 manager = digitalocean.Manager(token=do_token)
 my_droplets = manager.get_all_droplets()
 for droplet in my_droplets:
     print dir(droplet)
-
+    if droplet.name != name: continue
+    print ''
+    print ''
+    print droplet.name
+    print droplet.ip_adress
+    print droplet.private_ip_address
+    print droplet.region
+    print droplet.size
+    print droplet.networks
+    print ''
+    print ''
 
 droplet = digitalocean.Droplet(**inputargs)
 droplet.create()
