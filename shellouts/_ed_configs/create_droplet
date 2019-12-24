@@ -4,6 +4,7 @@ import os
 #import json
 #import sys
 from time import sleep
+from time import time
 import digitalocean
 
 do_token = os.environ.get("DO_TOKEN")
@@ -36,6 +37,7 @@ def create():
     
     results = {"name":name}
 
+    t0 = time()
     for droplet in my_droplets:
         if droplet.name != name: continue
         print "droplet {} already exists".format(name)
@@ -45,6 +47,7 @@ def create():
         print results
         return results
     
+    t0 = time()
     droplet = digitalocean.Droplet(**inputargs)
     droplet.create()
     
@@ -58,6 +61,10 @@ def create():
             if action.status != "completed": continue
             break
     
+    t1 = time()
+    time_length = t1 - t0
+    print "server creation time {}".format(time_length)
+
     my_droplets = manager.get_all_droplets()
     for droplet in my_droplets:
         if droplet.name != name: continue
