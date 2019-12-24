@@ -51,12 +51,12 @@ for droplet in my_droplets:
     droplet.destroy()
 
 for droplet in my_droplets:
-    if droplet.name == name: 
-        print "droplet {} already exists".format(name)
-        print 'name "{}"'.format(droplet.name)
-        print 'public_ip "{}"'.format(droplet.ip_address)
-        print 'private_ip "{}"'.format(droplet.private_ip_address)
-        exit(0)
+    if droplet.name != name: continue
+    print "droplet {} already exists".format(name)
+    print 'name "{}"'.format(droplet.name)
+    print 'public_ip "{}"'.format(droplet.ip_address)
+    print 'private_ip "{}"'.format(droplet.private_ip_address)
+    exit(0)
 
 
 droplet = digitalocean.Droplet(**inputargs)
@@ -72,9 +72,11 @@ for action in actions:
         if action.status != "completed": continue
         break
 
-#my_droplets = manager.get_all_droplets()
-#        print droplet.name
-#        print droplet.ip_address
-#        print droplet.private_ip_address
-#        print droplet.region
-#        break
+my_droplets = manager.get_all_droplets()
+for droplet in my_droplets:
+    if droplet.name != name: continue
+    print "droplet {} already exists".format(name)
+    print 'name "{}"'.format(droplet.name)
+    print 'public_ip "{}"'.format(droplet.ip_address)
+    print 'private_ip "{}"'.format(droplet.private_ip_address)
+    exit(0)
