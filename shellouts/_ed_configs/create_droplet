@@ -49,6 +49,15 @@ for droplet in my_droplets:
     if droplet.name != name: continue
     droplet.shutdown()
 
+for droplet in my_droplets:
+    if droplet.name == name: 
+        print "droplet {} already exists".format(name)
+        print 'name "{}"'.format(droplet.name)
+        print 'public_ip "{}"'.format(droplet.ip_address)
+        print 'private_ip "{}"'.format(droplet.private_ip_address)
+        exit(0)
+
+
 droplet = digitalocean.Droplet(**inputargs)
 droplet.create()
 
