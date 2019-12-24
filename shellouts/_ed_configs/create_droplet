@@ -38,14 +38,16 @@ my_droplets = manager.get_all_droplets()
 #    droplet.shutdown()
 #    droplet.destroy()
 
+results = {"name":name}
+
 for droplet in my_droplets:
     if droplet.name != name: continue
     print "droplet {} already exists".format(name)
-    print 'name "{}"'.format(droplet.name)
-    print 'public_ip "{}"'.format(droplet.ip_address)
-    print 'private_ip "{}"'.format(droplet.private_ip_address)
+    results["id"] = droplet.id
+    results["public_ip"] = droplet.ip_address
+    results["private_ip"] = droplet.private_ip_address
+    print results
     exit(0)
-
 
 droplet = digitalocean.Droplet(**inputargs)
 droplet.create()
@@ -63,8 +65,8 @@ for action in actions:
 my_droplets = manager.get_all_droplets()
 for droplet in my_droplets:
     if droplet.name != name: continue
-    print 'name "{}"'.format(droplet.name)
-    print 'id "{}"'.format(droplet.id)
-    print 'public_ip "{}"'.format(droplet.ip_address)
-    print 'private_ip "{}"'.format(droplet.private_ip_address)
+    results["id"] = droplet.id
+    results["public_ip"] = droplet.ip_address
+    results["private_ip"] = droplet.private_ip_address
+    print results
     exit(0)
