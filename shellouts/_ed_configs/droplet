@@ -88,13 +88,14 @@ class Main(DoCli):
 
         self.get_region()
         name = self.inputargs["name"]
-        image = self.inputargs.get("image","s-1vcpu-1gb")
+        image = self.inputargs.get("image","53263886")
         droplet_size = self.inputargs.get("DROPLET_SIZE","s-1vcpu-1gb")
         key_id = self.inputargs.get("key_id")
         add_tags = self.inputargs.get("tags")
+        backup = self.inputargs.get("backup")
+
         confirm = self.inputargs.get("confirm",True)
         monitoring = self.inputargs.get("monitoring",True)
-        backup = self.inputargs.get("backup")
         private_networking = self.inputargs.get("private_networking",True)
 
         # Needs False if it finds the server
@@ -164,7 +165,6 @@ class Main(DoCli):
         resource["destroy"]["env_vars"] = json.dumps({"NAME":name,
                                                       "CONFIRM":confirm,
                                                       "INSTANCE_ID":resource["id"],
-                                                      "NAME":resource["name"],
                                                       "METHOD":"destroy",
                                                       "DO_DEFAULT_REGION":self.do_default_region,
                                                       "DO_TOKEN":self.do_token})
