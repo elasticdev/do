@@ -73,5 +73,4 @@ for action in actions:
         print droplet.ip_address
         print droplet.private_ip_address
         print droplet.region
-        print droplet.size
         break
