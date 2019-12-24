@@ -47,14 +47,7 @@ my_droplets = manager.get_all_droplets()
 
 for droplet in my_droplets:
     if droplet.name != name: continue
-    print ''
-    print ''
-    print 'name "{}"'.format(droplet.name)
-    print 'public_ip "{}"'.format(droplet.ip_address)
-    print 'private_ip "{}"'.format(droplet.private_ip_address)
-    print 'region "{}"'.format(droplet.region)
-    print ''
-    print ''
+    droplet.shutdown()
 
 droplet = digitalocean.Droplet(**inputargs)
 droplet.create()
@@ -65,14 +58,13 @@ for action in actions:
     while True:
         sleep(1)
         action.load()
-        # Once it shows complete, droplet is up and running
         print action.status
         if action.status != "completed": continue
-        if private_networking:
-            print droplet.private_ip_address
-            if not droplet.private_ip_address: continue
-        print droplet.name
-        print droplet.ip_address
-        print droplet.private_ip_address
-        print droplet.region
         break
+
+#my_droplets = manager.get_all_droplets()
+#        print droplet.name
+#        print droplet.ip_address
+#        print droplet.private_ip_address
+#        print droplet.region
+#        break
