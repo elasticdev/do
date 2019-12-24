@@ -59,7 +59,7 @@ def create():
         while True:
             sleep(1)
             action.load()
-            print action.status
+            print "server status {}".format(action.status)
             if action.status != "completed": continue
             break
     
