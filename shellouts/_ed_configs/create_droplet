@@ -42,3 +42,4 @@ for action in actions:
         action.load()
         # Once it shows complete, droplet is up and running
         print action.status
+        sleep(1)
