@@ -8,7 +8,7 @@ variable "vm_image" {
   default = "ubuntu-18-04-x64"
 }
 variable "vm_region" {
-  default = "sfo2"
+  default = "nyc3"
 }
 variable "vm_size" {
   default = "s-1vcpu-1gb"
