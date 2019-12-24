@@ -44,8 +44,8 @@ if backup: inputargs["backups"] = True
 
 manager = digitalocean.Manager(token=do_token)
 my_droplets = manager.get_all_droplets()
+
 for droplet in my_droplets:
-    print dir(droplet)
     if droplet.name != name: continue
     print ''
     print ''
@@ -54,7 +54,7 @@ for droplet in my_droplets:
     print droplet.private_ip_address
     print droplet.region
     print droplet.size
-    print droplet.networks
+    #print droplet.networks
     print ''
     print ''
 
