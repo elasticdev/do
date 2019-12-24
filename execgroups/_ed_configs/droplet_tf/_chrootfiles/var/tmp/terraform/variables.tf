@@ -26,5 +26,5 @@ variable "vm_ipv6" {
   default = 0
 }
 variable "vm_name" {
-  default = "terraform-digitalocean-droplets-ubuntu"
+  default = "ubuntu-base"
 }
