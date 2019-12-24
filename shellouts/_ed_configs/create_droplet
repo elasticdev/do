@@ -3,14 +3,11 @@
 import os
 #import json
 #import sys
-#from time import sleep
+from time import sleep
 import digitalocean
 
 do_token = os.environ.get("DO_TOKEN")
 if not do_token: do_token = os.environ["DIGITALOCEAN_TOKEN"]
-
-#manager = digitalocean.Manager(token=do_token)
-#print(manager.get_all_droplets())
 
 # Creating a Droplet and checking its status
 name = os.environ["NAME"]
@@ -31,6 +28,12 @@ inputargs = { "token":do_token,
 if backup: inputargs["backups"] = True
 if monitoring: inputargs["monitoring"] = True
 if key_id: inputargs["ssh_keys"] = key_id
+
+manager = digitalocean.Manager(token=do_token)
+my_droplets = manager.get_all_droplets()
+for droplet in my_droplets:
+    print dir(droplet)
+
 
 droplet = digitalocean.Droplet(**inputargs)
 droplet.create()
