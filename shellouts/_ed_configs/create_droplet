@@ -25,9 +25,10 @@ inputargs = { "token":do_token,
               "image":image,
               "size_slug":size }
 
-if backup: inputargs["backups"] = True
+if private_networking: inputargs["private_networking"] = True
 if monitoring: inputargs["monitoring"] = True
 if key_id: inputargs["ssh_keys"] = key_id
+if backup: inputargs["backups"] = True
 
 #'destroy',
 #'id',
