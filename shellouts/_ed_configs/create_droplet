@@ -53,8 +53,6 @@ for droplet in my_droplets:
     print 'public_ip "{}"'.format(droplet.ip_address)
     print 'private_ip "{}"'.format(droplet.private_ip_address)
     print 'region "{}"'.format(droplet.region)
-    print 'size "{}"'.format(droplet.size)
-    #print droplet.networks
     print ''
     print ''
 
@@ -70,6 +68,9 @@ for action in actions:
         # Once it shows complete, droplet is up and running
         print action.status
         if action.status != "completed": continue
+        if private_networking:
+            print droplet.private_ip_address
+            if not droplet.private_ip_address: continue
         print droplet.name
         print droplet.ip_address
         print droplet.private_ip_address
