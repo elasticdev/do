@@ -13,8 +13,4 @@ resource "digitalocean_droplet" "vm" {
   monitoring         = "${var.vm_monitoring}"
   ipv6               = "${var.vm_ipv6}"
   name               = "${var.vm_name}-${count.index}"
-
-  provisioner "local-exec" {
-    command = "sleep 25s"
-  }
 }
