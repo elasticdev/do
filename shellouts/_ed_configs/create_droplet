@@ -9,8 +9,8 @@ import digitalocean
 do_token = os.environ.get("DO_TOKEN")
 if not do_token: do_token = os.environ["DIGITALOCEAN_TOKEN"]
 
-manager = digitalocean.Manager(token=do_token)
-print(manager.get_all_droplets())
+#manager = digitalocean.Manager(token=do_token)
+#print(manager.get_all_droplets())
 
 # Creating a Droplet and checking its status
 name = os.environ["NAME"]
@@ -21,7 +21,6 @@ backup = os.environ.get("BACKUP")
 private_networking = os.environ.get("PRIVATE_NETWORKING",True)
 monitoring = os.environ.get("MONITORING",True)
 key_id = os.environ.get("KEY_ID")
-
 
 inputargs = { "token":do_token,
               "name":name,
@@ -39,6 +38,7 @@ droplet.create()
 actions = droplet.get_actions()
 
 for action in actions:
-    action.load()
-    # Once it shows complete, droplet is up and running
-    print action.status
+    while True:
+        action.load()
+        # Once it shows complete, droplet is up and running
+        print action.status
