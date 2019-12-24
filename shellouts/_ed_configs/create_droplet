@@ -64,7 +64,13 @@ actions = droplet.get_actions()
 
 for action in actions:
     while True:
+        sleep(1)
         action.load()
         # Once it shows complete, droplet is up and running
-        print action.status
-        sleep(1)
+        if action.status != "completed": continue
+        print droplet.name
+        print droplet.ip_adress
+        print droplet.private_ip_address
+        print droplet.region
+        print droplet.size
+        break
