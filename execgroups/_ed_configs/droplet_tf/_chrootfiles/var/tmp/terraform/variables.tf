@@ -1,6 +1,5 @@
 variable "do_token" {}
-variable "vm_ssh_key_ids" { type = "list" }
-
+variable "vm_ssh_key_id" {}
 variable "vm_num_of_droplets" {
   default = 1
 }

@@ -4,7 +4,7 @@ provider "digitalocean" {
 
 resource "digitalocean_droplet" "vm" {
   count = "${var.vm_num_of_droplets}"
-  ssh_keys           = ["${var.vm_ssh_key_ids}"]
+  ssh_keys           = ["${var.vm_ssh_key_id}"]
   image              = "${var.vm_image}"
   region             = "${var.vm_region}"
   size               = "${var.vm_size}"
