@@ -45,10 +45,10 @@ if backup: inputargs["backups"] = True
 manager = digitalocean.Manager(token=do_token)
 my_droplets = manager.get_all_droplets()
 
-for droplet in my_droplets:
-    if droplet.name != name: continue
-    droplet.shutdown()
-    droplet.destroy()
+#for droplet in my_droplets:
+#    if droplet.name != name: continue
+#    droplet.shutdown()
+#    droplet.destroy()
 
 for droplet in my_droplets:
     if droplet.name != name: continue
