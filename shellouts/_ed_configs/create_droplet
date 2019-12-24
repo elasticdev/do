@@ -30,18 +30,6 @@ if monitoring: inputargs["monitoring"] = True
 if key_id: inputargs["ssh_keys"] = [ int(key_id) ]
 if backup: inputargs["backups"] = True
 
-#'destroy',
-#'id',
-#'image',
-#'ip_address',
-#'name',
-#'networks',
-#'private_ip_address',
-#'region',
-#'size',
-#'size_slug',
-#'snapshot_ids',
-
 manager = digitalocean.Manager(token=do_token)
 my_droplets = manager.get_all_droplets()
 
@@ -75,8 +63,8 @@ for action in actions:
 my_droplets = manager.get_all_droplets()
 for droplet in my_droplets:
     if droplet.name != name: continue
-    print "droplet {} already exists".format(name)
     print 'name "{}"'.format(droplet.name)
+    print 'id "{}"'.format(droplet.id)
     print 'public_ip "{}"'.format(droplet.ip_address)
     print 'private_ip "{}"'.format(droplet.private_ip_address)
     exit(0)
