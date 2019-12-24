@@ -85,5 +85,5 @@ def destroy():
             if droplet.name != name: continue
             droplet.destroy()
 
-destroy()
+#destroy()
 create()
