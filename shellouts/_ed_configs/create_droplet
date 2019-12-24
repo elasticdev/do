@@ -49,11 +49,11 @@ for droplet in my_droplets:
     if droplet.name != name: continue
     print ''
     print ''
-    print droplet.name
-    print droplet.ip_address
-    print droplet.private_ip_address
-    print droplet.region
-    print droplet.size
+    print 'name "{}"'.format(droplet.name)
+    print 'public_ip "{}"'.format(droplet.ip_address)
+    print 'private_ip "{}"'.format(droplet.private_ip_address)
+    print 'region "{}"'.format(droplet.region)
+    print 'size "{}"'.format(droplet.size)
     #print droplet.networks
     print ''
     print ''
