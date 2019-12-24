@@ -49,7 +49,7 @@ for droplet in my_droplets:
     print ''
     print ''
     print droplet.name
-    print droplet.ip_adress
+    print droplet.ip_address
     print droplet.private_ip_address
     print droplet.region
     print droplet.size
@@ -69,7 +69,7 @@ for action in actions:
         # Once it shows complete, droplet is up and running
         if action.status != "completed": continue
         print droplet.name
-        print droplet.ip_adress
+        print droplet.ip_address
         print droplet.private_ip_address
         print droplet.region
         print droplet.size
