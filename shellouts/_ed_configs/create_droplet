@@ -47,9 +47,11 @@ def create():
         print results
         return results
     
-    t0 = time()
     droplet = digitalocean.Droplet(**inputargs)
+
+    t0 = time()
     droplet.create()
+    sleep(2)
     
     actions = droplet.get_actions()
     
