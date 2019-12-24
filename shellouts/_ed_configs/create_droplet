@@ -67,6 +67,7 @@ for action in actions:
         sleep(1)
         action.load()
         # Once it shows complete, droplet is up and running
+        print action.status
         if action.status != "completed": continue
         print droplet.name
         print droplet.ip_address
