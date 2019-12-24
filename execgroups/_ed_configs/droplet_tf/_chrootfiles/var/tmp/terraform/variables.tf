@@ -1,10 +1,8 @@
 variable "do_token" {}
 variable "vm_ssh_key_id" {}
+variable "vm_image" {}
 variable "vm_num_of_droplets" {
   default = 1
-}
-variable "vm_image" {
-  default = "ubuntu-18-04-x64"
 }
 variable "vm_region" {
   default = "nyc3"
