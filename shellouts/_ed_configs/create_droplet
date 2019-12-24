@@ -9,64 +9,81 @@ import digitalocean
 do_token = os.environ.get("DO_TOKEN")
 if not do_token: do_token = os.environ["DIGITALOCEAN_TOKEN"]
 
-# Creating a Droplet and checking its status
-name = os.environ["NAME"]
-region = os.environ.get("DO_DEFAULT_REGION","nyc3")
-image = os.environ.get("IMAGE","53263886")
-size = os.environ.get("DROPLET_SIZE","s-1vcpu-1gb")
-backup = os.environ.get("BACKUP")
-private_networking = os.environ.get("PRIVATE_NETWORKING",True)
-monitoring = os.environ.get("MONITORING",True)
-key_id = os.environ.get("KEY_ID")
 
-inputargs = { "token":do_token,
-              "name":name,
-              "region":region,
-              "image":image,
-              "size_slug":size }
+def create():
+    name = os.environ["NAME"]
+    region = os.environ.get("DO_DEFAULT_REGION","nyc3")
+    image = os.environ.get("IMAGE","53263886")
+    size = os.environ.get("DROPLET_SIZE","s-1vcpu-1gb")
+    backup = os.environ.get("BACKUP")
+    private_networking = os.environ.get("PRIVATE_NETWORKING",True)
+    monitoring = os.environ.get("MONITORING",True)
+    key_id = os.environ.get("KEY_ID")
+    
+    inputargs = { "token":do_token,
+                  "name":name,
+                  "region":region,
+                  "image":image,
+                  "size_slug":size }
+    
+    if private_networking: inputargs["private_networking"] = True
+    if monitoring: inputargs["monitoring"] = True
+    if key_id: inputargs["ssh_keys"] = [ int(key_id) ]
+    if backup: inputargs["backups"] = True
+    
+    manager = digitalocean.Manager(token=do_token)
+    my_droplets = manager.get_all_droplets()
+    
+    results = {"name":name}
 
-if private_networking: inputargs["private_networking"] = True
-if monitoring: inputargs["monitoring"] = True
-if key_id: inputargs["ssh_keys"] = [ int(key_id) ]
-if backup: inputargs["backups"] = True
+    for droplet in my_droplets:
+        if droplet.name != name: continue
+        print "droplet {} already exists".format(name)
+        results["id"] = droplet.id
+        results["public_ip"] = droplet.ip_address
+        results["private_ip"] = droplet.private_ip_address
+        print results
+        return results
+    
+    droplet = digitalocean.Droplet(**inputargs)
+    droplet.create()
+    
+    actions = droplet.get_actions()
+    
+    for action in actions:
+        while True:
+            sleep(1)
+            action.load()
+            print action.status
+            if action.status != "completed": continue
+            break
+    
+    my_droplets = manager.get_all_droplets()
+    for droplet in my_droplets:
+        if droplet.name != name: continue
+        results["id"] = droplet.id
+        results["public_ip"] = droplet.ip_address
+        results["private_ip"] = droplet.private_ip_address
+        print results
+        return results
 
-manager = digitalocean.Manager(token=do_token)
-my_droplets = manager.get_all_droplets()
+def destroy():
 
-#for droplet in my_droplets:
-#    if droplet.name != name: continue
-#    droplet.shutdown()
-#    droplet.destroy()
+    name = os.environ.get("NAME")
+    _id = os.environ.get("ID")
 
-results = {"name":name}
+    manager = digitalocean.Manager(token=do_token)
+    my_droplets = manager.get_all_droplets()
 
-for droplet in my_droplets:
-    if droplet.name != name: continue
-    print "droplet {} already exists".format(name)
-    results["id"] = droplet.id
-    results["public_ip"] = droplet.ip_address
-    results["private_ip"] = droplet.private_ip_address
-    print results
-    exit(0)
+    if _id:
+        for droplet in my_droplets:
+            if droplet.id != _id: continue
+            droplet.destroy()
 
-droplet = digitalocean.Droplet(**inputargs)
-droplet.create()
+    elif name:
+        for droplet in my_droplets:
+            if droplet.name != name: continue
+            droplet.destroy()
 
-actions = droplet.get_actions()
-
-for action in actions:
-    while True:
-        sleep(1)
-        action.load()
-        print action.status
-        if action.status != "completed": continue
-        break
-
-my_droplets = manager.get_all_droplets()
-for droplet in my_droplets:
-    if droplet.name != name: continue
-    results["id"] = droplet.id
-    results["public_ip"] = droplet.ip_address
-    results["private_ip"] = droplet.private_ip_address
-    print results
-    exit(0)
+destroy()
+create()
