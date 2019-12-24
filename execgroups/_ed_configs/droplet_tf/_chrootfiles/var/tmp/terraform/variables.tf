@@ -13,16 +13,16 @@ variable "vm_size" {
   default = "s-1vcpu-1gb"
 }
 variable "vm_private_networking" {
-  default = 1
+  default = null
 }
 variable "vm_backups" {
-  default = 0
+  default = null
 }
 variable "vm_monitoring" {
-  default = 0
+  default = null
 }
 variable "vm_ipv6" {
-  default = 0
+  default = null
 }
 variable "vm_name" {
   default = "ubuntu-base"
