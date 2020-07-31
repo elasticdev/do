@@ -117,7 +117,7 @@ class Main(DoCli):
         if backup: _cmd = "{} --enable-backups".format(_cmd)
 
         if confirm: _cmd = "{} --wait".format(_cmd)
-        cmd = self.get_final_cmd(_cmd,output_json=True)
+        cmd = self.get_final_cmd(_cmd,output_to_json=True)
 
         Instance = self.execute(cmd,convert_to_json=True,exit_error=True)["output"][0]
 
@@ -202,7 +202,7 @@ class Main(DoCli):
                                          ref_hostname)
 
         # You don't include region when deleting on digital ocean
-        cmd = self.get_final_cmd(_cmd,add_region=False,output_json=True)
+        cmd = self.get_final_cmd(_cmd,add_region=False,output_to_json=True)
         results = self.execute(cmd,convert_to_json=None)
 
         if results.get("status") is True: 
