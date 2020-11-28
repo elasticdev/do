@@ -148,12 +148,8 @@ class Main(DoCli):
         tags = self.get_tags()
         tags.extend( [ resource["id"], resource["name"], resource["region"] ] )
 
-        if add_tags:
-            try:
-                add_tags = to_json(add_tags)
-            except:
-                add_tags = to_list(add_tags,split_char=",")
-
+        if add_tags: 
+            add_tags = to_list(add_tags,split_char=",")
             tags.append(add_tags)
 
         # Make sure tags are distinct
