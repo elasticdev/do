@@ -21,8 +21,8 @@ import json
 import sys
 from time import sleep
 
-from ed_helper_publisher.utilities import convert_str2json
-from ed_helper_publisher.utilities import convert_str2list
+from ed_helper_publisher.utilities import to_json
+from ed_helper_publisher.utilities import to_list
 from ed_helper_publisher.loggerly import ElasticDevLogger
 from ed_helper_publisher.cloud.docli import DoCli
 
@@ -150,9 +150,9 @@ class Main(DoCli):
 
         if add_tags:
             try:
-                add_tags = convert_str2json(add_tags)
+                add_tags = to_json(add_tags)
             except:
-                add_tags = convert_str2list(add_tags,split_char=",")
+                add_tags = to_list(add_tags,split_char=",")
 
             tags.append(add_tags)
 
